@@ -3,1155 +3,767 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distrito 110 - Tienda Online</title>
+    <title>MotoRepuestos - Tu Tienda de Repuestos para Motos</title>
     <style>
+        /* Estilos generales */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --amarillo-mostaza: #D4A017;
-            --negro: #1a1a1a;
-            --rojo: #DC143C;
-            --blanco: #ffffff;
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --accent: #f1faee;
+            --light: #a8dadc;
+            --dark: #457b9d;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-            color: var(--negro);
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
         }
 
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header y navegación */
         header {
-            background-color: var(--negro);
-            color: var(--blanco);
-            padding: 1.5rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
         .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            color: var(--amarillo-mostaza);
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
         }
 
-        .header-buttons {
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
             display: flex;
-            gap: 1rem;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--light);
+        }
+
+        .nav-icons {
+            display: flex;
             align-items: center;
         }
 
-        .admin-btn, .cart-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .nav-icons a {
+            color: white;
+            margin-left: 15px;
+            font-size: 1.2rem;
         }
 
-        .admin-btn {
-            background-color: var(--amarillo-mostaza);
-            color: var(--negro);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s;
         }
 
-        .admin-btn:hover {
-            background-color: #FFD700;
-            transform: scale(1.05);
-        }
-
-        .cart-btn {
-            background-color: var(--rojo);
-            color: var(--blanco);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .cart-btn:hover {
-            background-color: #ff1744;
-            transform: scale(1.05);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: var(--amarillo-mostaza);
-            color: var(--negro);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--negro) 0%, var(--rojo) 100%);
-            color: var(--blanco);
-            padding: 4rem 2rem;
+            background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.9)), url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
             text-align: center;
-            border-radius: 15px;
-            margin-bottom: 3rem;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--amarillo-mostaza);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
         }
 
-        .categories {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background-color: var(--amarillo-mostaza);
-            color: var(--negro);
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
             font-weight: bold;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .category-btn:hover, .category-btn.active {
-            background-color: var(--rojo);
-            color: var(--blanco);
-            transform: translateY(-2px);
+        .btn:hover {
+            background-color: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .products-grid {
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--secondary);
+        }
+
+        /* Sección de categorías */
+        .categories {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-img {
+            height: 180px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--secondary);
+        }
+
+        .category-card h3 {
+            padding: 20px;
+            color: var(--secondary);
+        }
+
+        /* Sección de productos destacados */
+        .featured {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .product-card {
-            background-color: var(--blanco);
-            border-radius: 15px;
+            background-color: white;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
-            cursor: pointer;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
         }
 
-        .product-image {
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        .product-img {
+            height: 200px;
+            background-color: #e9ecef;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-image .placeholder-icon {
-            font-size: 4rem;
+            color: var(--secondary);
+            font-size: 2.5rem;
         }
 
         .product-info {
-            padding: 1.5rem;
+            padding: 20px;
         }
 
-        .product-name {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: var(--negro);
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
 
         .product-price {
-            font-size: 1.5rem;
-            color: var(--rojo);
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background-color: var(--amarillo-mostaza);
-            color: var(--negro);
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background-color: var(--rojo);
-            color: var(--blanco);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            overflow-y: auto;
-            padding: 2rem;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: var(--blanco);
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--amarillo-mostaza);
         }
 
-        .modal-header h2 {
-            color: var(--negro);
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--rojo);
-            transition: transform 0.3s;
-        }
-
-        .close-btn:hover {
-            transform: rotate(90deg);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .price {
             font-weight: bold;
-            color: var(--negro);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--amarillo-mostaza);
-        }
-
-        .image-upload-area {
-            border: 3px dashed var(--amarillo-mostaza);
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background-color: #fff9e6;
-        }
-
-        .image-upload-area:hover {
-            background-color: #fff3cc;
-            border-color: var(--rojo);
-        }
-
-        .image-upload-area.dragover {
-            background-color: #ffe4b3;
-            border-color: var(--rojo);
-        }
-
-        .image-preview {
-            max-width: 100%;
-            max-height: 200px;
-            margin-top: 1rem;
-            border-radius: 8px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background-color: var(--rojo);
-            color: var(--blanco);
-            border: none;
-            padding: 1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .submit-btn:hover {
-            background-color: #ff1744;
-            transform: scale(1.02);
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-name {
-            font-weight: bold;
-            color: var(--negro);
-        }
-
-        .cart-item-price {
-            color: var(--rojo);
-            font-weight: bold;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-right: 1rem;
-        }
-
-        .quantity-btn {
-            background-color: var(--amarillo-mostaza);
-            color: var(--negro);
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .quantity-btn:hover {
-            background-color: var(--rojo);
-            color: var(--blanco);
-        }
-
-        .remove-btn {
-            background-color: var(--rojo);
-            color: var(--blanco);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .remove-btn:hover {
-            background-color: #ff1744;
-        }
-
-        .cart-total {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid var(--amarillo-mostaza);
-            text-align: right;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--negro);
-        }
-
-        .checkout-section {
-            margin-top: 2rem;
-        }
-
-        .payment-methods {
-            display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
-        .payment-method {
-            flex: 1;
-            min-width: 150px;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-            background-color: var(--blanco);
-        }
-
-        .payment-method:hover {
-            border-color: var(--amarillo-mostaza);
-            transform: scale(1.05);
-        }
-
-        .payment-method.selected {
-            border-color: var(--rojo);
-            background-color: #ffe8ec;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            background-color: var(--rojo);
-            color: var(--blanco);
-            border: none;
-            padding: 1.2rem;
-            border-radius: 10px;
-            cursor: pointer;
             font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 1rem;
+            color: var(--primary);
+        }
+
+        /* Sección de servicios */
+        .services {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
             transition: all 0.3s;
         }
 
-        .checkout-btn:hover {
-            background-color: #ff1744;
-            transform: scale(1.02);
+        .service-card:hover {
+            background-color: var(--light);
         }
 
-        .checkout-btn:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
         }
 
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            border-radius: 50%;
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        /* Sección de contacto */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            z-index: 1500;
+        }
+
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--light);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1f2e;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #aaa;
             text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        .footer-col ul li a:hover {
+            color: white;
         }
 
-        .whatsapp-btn svg {
-            width: 35px;
-            height: 35px;
-            fill: white;
-        }
-
-        .empty-cart, .empty-products {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: #666;
-            font-size: 1.2rem;
-        }
-
-        .admin-products-list {
-            margin-top: 2rem;
-        }
-
-        .admin-product-card {
-            background-color: #f9f9f9;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+        .social-links {
             display: flex;
-            gap: 1rem;
-            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .admin-product-image {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .admin-product-info {
-            flex: 1;
-        }
-
-        .admin-product-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .edit-btn, .delete-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+        .social-links a {
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
         }
 
-        .edit-btn {
-            background-color: var(--amarillo-mostaza);
-            color: var(--negro);
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
         }
 
-        .edit-btn:hover {
-            background-color: #FFD700;
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
         }
 
-        .delete-btn {
-            background-color: var(--rojo);
-            color: var(--blanco);
-        }
-
-        .delete-btn:hover {
-            background-color: #ff1744;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: var(--secondary);
+                transition: all 0.3s;
+                padding: 20px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 1rem;
+            .hero p {
+                font-size: 1rem;
             }
 
-            .payment-methods {
-                flex-direction: column;
-            }
-
-            .payment-method {
-                min-width: 100%;
-            }
-
-            .admin-product-card {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .header-content {
-                justify-content: center;
-            }
-
-            .header-buttons {
-                width: 100%;
-                justify-content: center;
+            .btn {
+                padding: 10px 20px;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="header-content">
-            <div class="logo">▸ DISTRITO 110</div>
-            <div class="header-buttons">
-                <button class="admin-btn" onclick="toggleAdmin()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3"></path>
-                    </svg>
-                    Administrar
-                </button>
-                <button class="cart-btn" onclick="toggleCart()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    Carrito
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
+        <div class="container header-content">
+            <a href="#" class="logo">Moto<span>Repuestos</span></a>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#categorias">Categorías</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#"><i class="fas fa-user"></i></a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="hero">
-            <h1>Moda que Define tu Estilo</h1>
-            <p>Descubre nuestra colección exclusiva de ropa y calzado</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Repuestos de Calidad para tu Moto</h1>
+            <p>Encuentra todo lo que necesitas para mantener tu moto en perfecto estado. Tenemos repuestos originales y alternativos para todas las marcas.</p>
+            <a href="#productos" class="btn">Ver Productos</a>
+            <a href="#contacto" class="btn btn-secondary">Contactar</a>
         </div>
+    </section>
 
-        <div class="categories">
-            <button class="category-btn active" onclick="filterCategory('todos')">Todos</button>
-            <button class="category-btn" onclick="filterCategory('ropa')">Ropa</button>
-            <button class="category-btn" onclick="filterCategory('calzado')">Calzado</button>
-        </div>
-
-        <div class="products-grid" id="productsGrid"></div>
-    </div>
-
-    <!-- Modal Carrito -->
-    <div class="modal" id="cartModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Tu Carrito de Compras</h2>
-                <button class="close-btn" onclick="toggleCart()">×</button>
-            </div>
-            <div id="cartItems"></div>
-            <div class="cart-total">
-                Total: $<span id="cartTotal">0</span>
-            </div>
-            <div class="checkout-section">
-                <h3 style="margin-bottom: 1rem; color: var(--negro);">Método de Pago</h3>
-                <div class="payment-methods">
-                    <div class="payment-method" onclick="selectPayment('visa')">
-                        <svg width="60" height="40" viewBox="0 0 48 32" fill="none">
-                            <rect width="48" height="32" rx="4" fill="#1A1F71"/>
-                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">VISA</text>
-                        </svg>
-                        <div style="font-weight: bold; margin-top: 0.5rem;">Visa</div>
-                    </div>
-                    <div class="payment-method" onclick="selectPayment('mastercard')">
-                        <svg width="60" height="40" viewBox="0 0 48 32" fill="none">
-                            <rect width="48" height="32" rx="4" fill="#EB001B"/>
-                            <circle cx="18" cy="16" r="8" fill="#FF5F00" opacity="0.8"/>
-                            <circle cx="30" cy="16" r="8" fill="#F79E1B" opacity="0.8"/>
-                        </svg>
-                        <div style="font-weight: bold; margin-top: 0.5rem;">Mastercard</div>
-                    </div>
-                    <div class="payment-method" onclick="selectPayment('pse')">
-                        <svg width="60" height="40" viewBox="0 0 48 32" fill="none">
-                            <rect width="48" height="32" rx="4" fill="#00A859"/>
-                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="10" font-weight="bold">PSE</text>
-                        </svg>
-                        <div style="font-weight: bold; margin-top: 0.5rem;">PSE</div>
-                    </div>
-                </div>
-                <button class="checkout-btn" id="checkoutBtn" onclick="processCheckout()" disabled>
-                    Finalizar Compra
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Admin -->
-    <div class="modal" id="adminModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Panel de Administración</h2>
-                <button class="close-btn" onclick="toggleAdmin()">×</button>
+    <!-- Sección de Categorías -->
+    <section class="categories" id="categorias">
+        <div class="container">
+            <div class="section-title">
+                <h2>Categorías de Productos</h2>
+                <p>Explora nuestra amplia gama de repuestos organizados por categorías</p>
             </div>
             
-            <button class="submit-btn" onclick="showAddProduct()" style="margin-bottom: 2rem;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                Agregar Nuevo Producto
-            </button>
-
-            <div class="admin-products-list" id="adminProductsList"></div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Motor y Transmisión</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Sistema Eléctrico</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <h3>Frenos y Suspensión</h3>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3>Accesorios</h3>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Modal Agregar/Editar Producto -->
-    <div class="modal" id="productFormModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="formTitle">Agregar Producto</h2>
-                <button class="close-btn" onclick="closeProductForm()">×</button>
+    <!-- Sección de Productos Destacados -->
+    <section class="featured" id="productos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Productos Destacados</h2>
+                <p>Los repuestos más vendidos y mejor valorados por nuestros clientes</p>
             </div>
             
-            <form id="productForm" onsubmit="saveProduct(event)">
-                <div class="form-group">
-                    <label>Nombre del Producto *</label>
-                    <input type="text" id="productName" required placeholder="Ej: Camiseta Oversize">
-                </div>
-
-                <div class="form-group">
-                    <label>Categoría *</label>
-                    <select id="productCategory" required>
-                        <option value="">Seleccionar categoría</option>
-                        <option value="ropa">Ropa</option>
-                        <option value="calzado">Calzado</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Precio *</label>
-                    <input type="number" id="productPrice" required placeholder="Ej: 89900" min="0">
-                </div>
-
-                <div class="form-group">
-                    <label>Imagen del Producto</label>
-                    <div class="image-upload-area" id="imageUploadArea" 
-                         onclick="document.getElementById('imageInput').click()">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto;">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                        <p style="margin-top: 1rem;">Haz clic o arrastra una imagen aquí</p>
-                        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
-                            Formatos: JPG, PNG, WebP
-                        </p>
-                        <input type="file" id="imageInput" accept="image/*" 
-                               style="display: none;" onchange="handleImageSelect(event)">
-                        <img id="imagePreview" class="image-preview" style="display: none;">
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                        <polyline points="7 3 7 8 15 8"></polyline>
-                    </svg>
-                    Guardar Producto
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <a href="https://wa.me/573157138059?text=Hola,%20necesito%20ayuda%20con%20mi%20compra" 
-       class="whatsapp-btn" 
-       target="_blank"
-       title="¿Necesitas ayuda? Chatea con nosotros">
-        <svg viewBox="0 0 32 32">
-            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-4.713 1.262 1.262-4.669-0.292-0.508c-1.207-2.100-1.847-4.507-1.847-6.924 0-7.435 6.047-13.482 13.482-13.482s13.482 6.047 13.482 13.482c0 7.435-6.047 13.467-13.482 13.467zM21.305 18.421c-0.365-0.183-2.159-1.066-2.495-1.188s-0.578-0.183-0.822 0.183c-0.244 0.365-0.946 1.188-1.159 1.432s-0.427 0.274-0.792 0.091c-0.365-0.183-1.542-0.569-2.937-1.813-1.086-0.969-1.821-2.165-2.034-2.53s-0.022-0.562 0.161-0.744c0.165-0.165 0.365-0.427 0.548-0.64s0.244-0.365 0.365-0.609c0.122-0.244 0.061-0.457-0.030-0.64s-0.822-1.981-1.127-2.714c-0.296-0.714-0.597-0.617-0.822-0.628-0.213-0.011-0.457-0.013-0.701-0.013s-0.64 0.091-0.975 0.457c-0.335 0.365-1.279 1.250-1.279 3.048s1.310 3.536 1.493 3.78c0.183 0.244 2.582 3.943 6.254 5.531 0.874 0.378 1.556 0.604 2.088 0.773 0.878 0.279 1.677 0.24 2.308 0.145 0.704-0.105 2.159-0.883 2.464-1.735s0.305-1.585 0.213-1.735c-0.091-0.152-0.335-0.244-0.701-0.427z"/>
-        </svg>
-    </a>
-
-    <script>
-        let products = JSON.parse(localStorage.getItem('distrito110_products')) || [];
-        let cart = JSON.parse(localStorage.getItem('distrito110_cart')) || [];
-        let selectedPayment = null;
-        let editingProductId = null;
-        let currentImageData = null;
-
-        function saveToLocalStorage() {
-            localStorage.setItem('distrito110_products', JSON.stringify(products));
-            localStorage.setItem('distrito110_cart', JSON.stringify(cart));
-        }
-
-        function renderProducts(filter = 'todos') {
-            const grid = document.getElementById('productsGrid');
-            
-            if (products.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-products" style="grid-column: 1/-1;">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5" style="margin: 0 auto 1rem;">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <path d="M16 10a4 4 0 0 1-8 0"></path>
-                        </svg>
-                        <p>No hay productos disponibles</p>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">
-                            Usa el botón "Administrar" para agregar productos
-                        </p>
-                    </div>
-                `;
-                return;
-            }
-
-            const filteredProducts = filter === 'todos' 
-                ? products 
-                : products.filter(p => p.category === filter);
-
-            if (filteredProducts.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-products" style="grid-column: 1/-1;">
-                        <p>No hay productos en esta categoría</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = filteredProducts.map(product => `
+            <div class="product-grid">
                 <div class="product-card">
-                    <div class="product-image">
-                        ${product.image 
-                            ? `<img src="${product.image}" alt="${product.name}">` 
-                            : `<svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>`
-                        }
+                    <div class="product-img">
+                        <i class="fas fa-filter"></i>
                     </div>
                     <div class="product-info">
-                        <div class="product-name">${product.name}</div>
-                        <div class="product-price">$${product.price.toLocaleString('es-CO')}</div>
-                        <button class="add-to-cart" onclick="addToCart(${product.id})">
-                            Agregar al Carrito
-                        </button>
+                        <h3>Filtro de Aceite</h3>
+                        <p>Filtro de aceite de alta calidad para motos de diferentes cilindradas.</p>
+                        <div class="product-price">
+                            <span class="price">$15.99</span>
+                            <a href="#" class="btn">Agregar al Carrito</a>
+                        </div>
                     </div>
                 </div>
-            `).join('');
-        }
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Bujías NGK</h3>
+                        <p>Bujías de iridio para mejor combustión y rendimiento del motor.</p>
+                        <div class="product-price">
+                            <span class="price">$8.50</span>
+                            <a href="#" class="btn">Agregar al Carrito</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Aceite Motul 10W40</h3>
+                        <p>Aceite semisintético de alta calidad para motores de 4 tiempos.</p>
+                        <div class="product-price">
+                            <span class="price">$12.99</span>
+                            <a href="#" class="btn">Agregar al Carrito</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-braille"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pastillas de Freno</h3>
+                        <p>Pastillas de freno orgánicas para un frenado suave y eficiente.</p>
+                        <div class="product-price">
+                            <span class="price">$22.50</span>
+                            <a href="#" class="btn">Agregar al Carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function filterCategory(category) {
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
+    <!-- Sección de Servicios -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+                <p>Además de repuestos, ofrecemos servicios especializados para tu moto</p>
+            </div>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Asesoramiento Técnico</h3>
+                    <p>Nuestros expertos te ayudarán a encontrar el repuesto adecuado para tu moto.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Envío Rápido</h3>
+                    <p>Realizamos envíos a todo el país en un plazo máximo de 48 horas.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Garantía de Calidad</h3>
+                    <p>Todos nuestros productos cuentan con garantía del fabricante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contáctanos</h3>
+                    <p>¿Tienes preguntas sobre nuestros productos? No dudes en contactarnos, nuestro equipo estará encantado de ayudarte.</p>
+                    
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad</p>
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-envelope"></i> info@motorepuestos.com</p>
+                        <p><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 - 18:00</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Tu nombre" required>
+                        <input type="email" placeholder="Tu email" required>
+                        <input type="text" placeholder="Asunto">
+                        <textarea placeholder="Tu mensaje" required></textarea>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>MotoRepuestos</h3>
+                    <p>Tu tienda de confianza para repuestos de motos de alta calidad y servicios especializados.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#categorias">Categorías</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#">Motor y Transmisión</a></li>
+                        <li><a href="#">Sistema Eléctrico</a></li>
+                        <li><a href="#">Frenos y Suspensión</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Lubricantes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Suscríbete</h3>
+                    <p>Recibe ofertas exclusivas y novedades sobre nuestros productos.</p>
+                    <form>
+                        <input type="email" placeholder="Tu correo electrónico" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 MotoRepuestos. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle del menú móvil
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Cerrar menú al hacer clic en un enlace (en móviles)
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav').classList.remove('active');
             });
-            event.target.classList.add('active');
-            renderProducts(category);
-        }
-
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
-
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-
-            saveToLocalStorage();
-            updateCart();
-        }
-
-        function updateCart() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
-
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
-                cartTotal.textContent = '0';
-                return;
-            }
-
-            cartItems.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <div class="cart-item-info">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toLocaleString('es-CO')}</div>
-                    </div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <span style="font-weight: bold; min-width: 30px; text-align: center;">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                    </div>
-                    <button class="remove-btn" onclick="removeFromCart(${item.id})">Eliminar</button>
-                </div>
-            `).join('');
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartTotal.textContent = total.toLocaleString('es-CO');
-        }
-
-        function updateQuantity(productId, change) {
-            const item = cart.find(i => i.id === productId);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    removeFromCart(productId);
-                } else {
-                    saveToLocalStorage();
-                    updateCart();
+        });
+        
+        // Efecto de desplazamiento suave para los enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
                 }
-            }
-        }
-
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            saveToLocalStorage();
-            updateCart();
-        }
-
-        function toggleCart() {
-            const modal = document.getElementById('cartModal');
-            modal.classList.toggle('active');
-        }
-
-        function toggleAdmin() {
-            const modal = document.getElementById('adminModal');
-            modal.classList.toggle('active');
-            renderAdminProducts();
-        }
-
-        function selectPayment(method) {
-            selectedPayment = method;
-            document.querySelectorAll('.payment-method').forEach(pm => {
-                pm.classList.remove('selected');
             });
-            event.target.closest('.payment-method').classList.add('selected');
-            document.getElementById('checkoutBtn').disabled = false;
-        }
-
-        function processCheckout() {
-            if (!selectedPayment) {
-                alert('Por favor selecciona un método de pago');
-                return;
-            }
-
-            if (cart.length === 0) {
-                alert('Tu carrito está vacío');
-                return;
-            }
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            alert(`¡Compra realizada con éxito!\n\nMétodo de pago: ${selectedPayment.toUpperCase()}\nTotal: ${total.toLocaleString('es-CO')}\n\nGracias por tu compra en Distrito 110.`);
-            
-            cart = [];
-            selectedPayment = null;
-            saveToLocalStorage();
-            updateCart();
-            toggleCart();
-            document.querySelectorAll('.payment-method').forEach(pm => {
-                pm.classList.remove('selected');
-            });
-            document.getElementById('checkoutBtn').disabled = true;
-        }
-
-        function showAddProduct() {
-            editingProductId = null;
-            currentImageData = null;
-            document.getElementById('formTitle').textContent = 'Agregar Producto';
-            document.getElementById('productForm').reset();
-            document.getElementById('imagePreview').style.display = 'none';
-            document.getElementById('productFormModal').classList.add('active');
-        }
-
-        function closeProductForm() {
-            document.getElementById('productFormModal').classList.remove('active');
-            editingProductId = null;
-            currentImageData = null;
-        }
-
-        function handleImageSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentImageData = e.target.result;
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = currentImageData;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        const imageUploadArea = document.getElementById('imageUploadArea');
-        imageUploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            imageUploadArea.classList.add('dragover');
         });
-
-        imageUploadArea.addEventListener('dragleave', () => {
-            imageUploadArea.classList.remove('dragover');
-        });
-
-        imageUploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            imageUploadArea.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentImageData = e.target.result;
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = currentImageData;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function saveProduct(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const price = parseInt(document.getElementById('productPrice').value);
-
-            if (editingProductId) {
-                const product = products.find(p => p.id === editingProductId);
-                product.name = name;
-                product.category = category;
-                product.price = price;
-                if (currentImageData) {
-                    product.image = currentImageData;
-                }
-            } else {
-                const newProduct = {
-                    id: Date.now(),
-                    name,
-                    category,
-                    price,
-                    image: currentImageData
-                };
-                products.push(newProduct);
-            }
-
-            saveToLocalStorage();
-            renderProducts();
-            renderAdminProducts();
-            closeProductForm();
-            alert('Producto guardado exitosamente');
-        }
-
-        function renderAdminProducts() {
-            const list = document.getElementById('adminProductsList');
-            
-            if (products.length === 0) {
-                list.innerHTML = '<div class="empty-products">No hay productos. Agrega tu primer producto.</div>';
-                return;
-            }
-
-            list.innerHTML = products.map(product => `
-                <div class="admin-product-card">
-                    ${product.image 
-                        ? `<img src="${product.image}" alt="${product.name}" class="admin-product-image">` 
-                        : `<div class="admin-product-image" style="display: flex; align-items: center; justify-content: center; background: #f0f0f0;">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
-                        </div>`
-                    }
-                    <div class="admin-product-info">
-                        <h3>${product.name}</h3>
-                        <p>Categoría: ${product.category === 'ropa' ? 'Ropa' : 'Calzado'}</p>
-                        <p style="color: var(--rojo); font-weight: bold;">${product.price.toLocaleString('es-CO')}</p>
-                    </div>
-                    <div class="admin-product-actions">
-                        <button class="edit-btn" onclick="editProduct(${product.id})">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                            </svg>
-                            Editar
-                        </button>
-                        <button class="delete-btn" onclick="deleteProduct(${product.id})">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                            </svg>
-                            Eliminar
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function editProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            editingProductId = productId;
-            currentImageData = product.image;
-
-            document.getElementById('formTitle').textContent = 'Editar Producto';
-            document.getElementById('productName').value = product.name;
-            document.getElementById('productCategory').value = product.category;
-            document.getElementById('productPrice').value = product.price;
-            
-            if (product.image) {
-                const preview = document.getElementById('imagePreview');
-                preview.src = product.image;
-                preview.style.display = 'block';
-            }
-
-            document.getElementById('productFormModal').classList.add('active');
-        }
-
-        function deleteProduct(productId) {
-            if (confirm('¿Estás seguro de eliminar este producto?')) {
-                products = products.filter(p => p.id !== productId);
-                cart = cart.filter(item => item.id !== productId);
-                saveToLocalStorage();
-                renderProducts();
-                renderAdminProducts();
-                updateCart();
-            }
-        }
-
-        renderProducts();
-        updateCart();
     </script>
 </body>
 </html>
